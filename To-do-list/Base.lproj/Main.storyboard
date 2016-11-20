@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="toDoView" id="bEw-s0-bwA">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="toDoView" id="bEw-s0-bwA" customClass="ToDoTableViewCell" customModule="To_do_list" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bEw-s0-bwA" id="963-Yu-dY1">
@@ -33,6 +33,9 @@
                                                 <constraint firstAttribute="width" constant="46" id="RWH-rY-TuU"/>
                                             </constraints>
                                             <state key="normal" title="Button"/>
+                                            <connections>
+                                                <action selector="markCompleteButtonPressed:" destination="bEw-s0-bwA" eventType="touchUpInside" id="iqt-30-fVo"/>
+                                            </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Task" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JUz-LR-XCU">
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -53,6 +56,9 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="deadlineLabel" destination="xKm-qW-BXa" id="5vR-En-YKa"/>
+                                    <outlet property="markCompleteButton" destination="suX-AY-Liu" id="N12-R4-rky"/>
+                                    <outlet property="taskLabel" destination="JUz-LR-XCU" id="4Nl-Ui-tL5"/>
                                     <segue destination="BYZ-38-t0r" kind="show" id="F5c-qb-V8s"/>
                                 </connections>
                             </tableViewCell>
@@ -65,7 +71,7 @@
                     <navigationItem key="navigationItem" title="To-do List" id="4Pd-Sz-o9u">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="ITx-wE-4Ix">
                             <connections>
-                                <segue destination="mfT-hX-Apn" kind="show" id="fOd-ZI-Rs9"/>
+                                <segue destination="mfT-hX-Apn" kind="show" identifier="destinationVC" id="fOd-ZI-Rs9"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -102,9 +108,11 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Pb-we-K5i"/>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DHA-e0-GLS">
                                 <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="saveButtonPressed:" destination="mfT-hX-Apn" eventType="touchUpInside" id="ajJ-D1-Oog"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6W3-YM-S8R">
                                 <state key="normal" title="Cancel"/>
@@ -124,31 +132,34 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="ggE-37-Mcu">
+                                <date key="date" timeIntervalSinceReferenceDate="501302163.57410997">
+                                    <!--2016-11-20 02:36:03 +0000-->
+                                </date>
+                            </datePicker>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="L3t-4k-7W4" firstAttribute="top" secondItem="fYS-KX-fKY" secondAttribute="bottom" constant="54" id="57D-5E-ufj"/>
                             <constraint firstItem="DHA-e0-GLS" firstAttribute="leading" secondItem="Dsg-Ik-RPA" secondAttribute="leadingMargin" constant="84" id="Dka-XD-uh7"/>
-                            <constraint firstItem="2Pb-we-K5i" firstAttribute="top" secondItem="Wcf-2z-ejb" secondAttribute="bottom" constant="56" id="EED-aX-KtK"/>
+                            <constraint firstItem="6W3-YM-S8R" firstAttribute="top" secondItem="ggE-37-Mcu" secondAttribute="bottom" constant="24" id="KMx-kl-Dgi"/>
                             <constraint firstItem="inD-99-0RY" firstAttribute="top" secondItem="DHA-e0-GLS" secondAttribute="bottom" constant="144" id="RW5-b3-Uq9"/>
                             <constraint firstItem="gKc-3t-Eam" firstAttribute="leading" secondItem="Wcf-2z-ejb" secondAttribute="leading" id="Ryf-n0-kvV"/>
                             <constraint firstItem="L3t-4k-7W4" firstAttribute="leading" secondItem="Dsg-Ik-RPA" secondAttribute="leadingMargin" constant="21" id="S4T-SX-eQ1"/>
+                            <constraint firstItem="ggE-37-Mcu" firstAttribute="top" secondItem="gKc-3t-Eam" secondAttribute="bottom" constant="8" symbolic="YES" id="UIS-xz-eTA"/>
+                            <constraint firstAttribute="trailing" secondItem="ggE-37-Mcu" secondAttribute="trailing" id="VRV-0k-LSK"/>
                             <constraint firstAttribute="trailingMargin" secondItem="6W3-YM-S8R" secondAttribute="trailing" constant="61" id="XDd-Os-KeY"/>
                             <constraint firstItem="DHA-e0-GLS" firstAttribute="top" secondItem="6W3-YM-S8R" secondAttribute="top" id="aiN-qp-CMd"/>
                             <constraint firstItem="DHA-e0-GLS" firstAttribute="baseline" secondItem="6W3-YM-S8R" secondAttribute="baseline" id="bgE-JH-G9m"/>
-                            <constraint firstItem="DHA-e0-GLS" firstAttribute="top" secondItem="2Pb-we-K5i" secondAttribute="bottom" constant="52" id="gin-nh-bGj"/>
-                            <constraint firstItem="2Pb-we-K5i" firstAttribute="centerX" secondItem="Dsg-Ik-RPA" secondAttribute="centerX" id="h97-DV-n8i"/>
                             <constraint firstItem="Wcf-2z-ejb" firstAttribute="top" secondItem="L3t-4k-7W4" secondAttribute="bottom" constant="21" id="ldF-y2-8nX"/>
-                            <constraint firstItem="2Pb-we-K5i" firstAttribute="top" secondItem="gKc-3t-Eam" secondAttribute="bottom" constant="8" symbolic="YES" id="mhi-bp-qtz"/>
-                            <constraint firstItem="2Pb-we-K5i" firstAttribute="leading" secondItem="Dsg-Ik-RPA" secondAttribute="leadingMargin" constant="8" id="pdo-Cg-Z4l"/>
                             <constraint firstItem="L3t-4k-7W4" firstAttribute="leading" secondItem="Wcf-2z-ejb" secondAttribute="leading" id="twv-fq-yg6"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Wcf-2z-ejb" secondAttribute="trailing" constant="36" id="uug-z2-gAM"/>
+                            <constraint firstItem="ggE-37-Mcu" firstAttribute="leading" secondItem="Dsg-Ik-RPA" secondAttribute="leading" id="wsX-GM-66g"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="cancelButton" destination="6W3-YM-S8R" id="RMZ-S5-zs3"/>
-                        <outlet property="deadLinePicker" destination="2Pb-we-K5i" id="TLp-1h-Ax0"/>
-                        <outlet property="saveButtonPressed" destination="DHA-e0-GLS" id="KIL-h6-c0O"/>
+                        <outlet property="datePicker" destination="ggE-37-Mcu" id="rh4-jP-uZc"/>
                         <outlet property="textField" destination="Wcf-2z-ejb" id="8pc-Cw-9NJ"/>
                     </connections>
                 </viewController>
