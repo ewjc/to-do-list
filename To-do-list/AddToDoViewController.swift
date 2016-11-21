@@ -18,14 +18,24 @@ class AddToDoViewController: UIViewController {
     var toDodelegate: UpdateToDoDelegate!
     
     // MARK: Functions
+    func dismissViewController() {
+        presentingViewController?.dismiss(animated: true)
+    }
+    
+    
+    // MARK: IBActions
     @IBAction func saveButtonPressed(_ sender: UIButton) {
         let text = textField.text!
         let deadline = datePicker.date
         print(text)
         print(deadline)
         let task = ToDoTask(title: text, deadline: deadline)
-        
         toDodelegate?.updateNewTask(task: task)
+        dismissViewController()
+    }
+
+    @IBAction func cancelButtonPressed(_ sender: UIButton) {
+        dismissViewController()
     }
     
 
@@ -33,8 +43,6 @@ class AddToDoViewController: UIViewController {
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var datePicker: UIDatePicker!
 
-    // MARK: IBActions
-    @IBOutlet weak var cancelButton: UIButton!
     
     // MARK: View Did Life Cycle
     override func viewDidLoad() {

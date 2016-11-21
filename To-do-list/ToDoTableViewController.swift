@@ -61,7 +61,7 @@ class ToDoTableViewController: UITableViewController, UpdateToDoDelegate {
         let toDoTask = toDoArray[indexPath.row]
         cell.taskLabel.text = toDoTask.title
         cell.deadlineLabel.text = "\(toDoTask.deadline)"
-
+        
         return cell
     }
 

@@ -30,7 +30,6 @@ class ToDoViewController: UIViewController {
         super.viewDidLoad()
         
         
-        
     }
 
     override func didReceiveMemoryWarning() {
