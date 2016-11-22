@@ -11,12 +11,11 @@ import Foundation
 class ToDoTask {
     
     var title: String
-    var deadline: Date
+    var deadline: String
     
-    init(title: String, deadline: Date) {
+    init(title: String, deadline: String) {
         self.title = title
         self.deadline = deadline
-    
     }
     
     

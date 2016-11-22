@@ -59,7 +59,7 @@
                                     <outlet property="deadlineLabel" destination="xKm-qW-BXa" id="5vR-En-YKa"/>
                                     <outlet property="markCompleteButton" destination="suX-AY-Liu" id="N12-R4-rky"/>
                                     <outlet property="taskLabel" destination="JUz-LR-XCU" id="4Nl-Ui-tL5"/>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="F5c-qb-V8s"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="TaskCompetionVC" trigger="accessoryAction" id="pce-B2-lIo"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -71,7 +71,7 @@
                     <navigationItem key="navigationItem" title="To-do List" id="4Pd-Sz-o9u">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="ITx-wE-4Ix">
                             <connections>
-                                <segue destination="mfT-hX-Apn" kind="show" identifier="destinationVC" id="fOd-ZI-Rs9"/>
+                                <segue destination="mfT-hX-Apn" kind="presentation" identifier="destinationVC" id="fOd-ZI-Rs9"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -182,14 +182,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QCU-CS-gYH">
-                                <state key="normal" title="Mark as Undone"/>
+                                <state key="normal" title="Mark as done ✅"/>
+                                <connections>
+                                    <action selector="markUndoneButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xtr-dP-qex"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pBS-02-RZM">
                                 <state key="normal" title="Delete this to-do"/>
+                                <connections>
+                                    <action selector="deleteToDoButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RqO-5R-xQ5"/>
+                                </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deadline" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DSC-TF-CoL">
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deadline: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DSC-TF-CoL">
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <color key="textColor" red="0.85098039219999999" green="0.1529411765" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -205,8 +211,6 @@
                     </view>
                     <connections>
                         <outlet property="deadlineLabel" destination="DSC-TF-CoL" id="cdi-5X-MfS"/>
-                        <outlet property="deleteThisToDoButton" destination="pBS-02-RZM" id="ZPv-ke-TpP"/>
-                        <outlet property="markAsDone" destination="QCU-CS-gYH" id="oJh-VF-CzY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

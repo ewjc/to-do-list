@@ -9,13 +9,14 @@
 import UIKit
 
 protocol UpdateToDoDelegate {
-    func updateNewTask(task: ToDoTask)
+    func addNewTask(task: ToDoTask)
 }
 
 class AddToDoViewController: UIViewController {
     
     // MARK: Properties
-    var toDodelegate: UpdateToDoDelegate!
+    var toDoDelegate: UpdateToDoDelegate!
+    let dateFormatter = DateFormatter()
     
     // MARK: Functions
     func dismissViewController() {
@@ -27,10 +28,11 @@ class AddToDoViewController: UIViewController {
     @IBAction func saveButtonPressed(_ sender: UIButton) {
         let text = textField.text!
         let deadline = datePicker.date
-        print(text)
-        print(deadline)
-        let task = ToDoTask(title: text, deadline: deadline)
-        toDodelegate?.updateNewTask(task: task)
+        dateFormatter.dateStyle = .medium
+        let strDeadline = dateFormatter.string(from: deadline)
+        let task = ToDoTask(title: text, deadline: strDeadline)
+        print(task.deadline, task.title)
+        toDoDelegate?.addNewTask(task: task)
         dismissViewController()
     }
 
@@ -48,12 +50,10 @@ class AddToDoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         datePicker.datePickerMode = UIDatePickerMode.date
-        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-
     }
     
 }

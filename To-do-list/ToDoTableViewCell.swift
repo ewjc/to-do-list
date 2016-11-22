@@ -10,6 +10,11 @@ import UIKit
 
 class ToDoTableViewCell: UITableViewCell {
     
+    var ToDoTableVC: ToDoTableViewController!
+    
+    // MARK: Actions
+
+    
     // MARK: IBOutlets
     @IBOutlet weak var taskLabel: UILabel!
     @IBOutlet weak var deadlineLabel: UILabel!
@@ -18,6 +23,8 @@ class ToDoTableViewCell: UITableViewCell {
     
     // MARK: IBActions
     @IBAction func markCompleteButtonPressed(_ sender: UIButton) {
+        deadlineLabel.text = "\(ToDoTableVC.toDoArray)"
+        
     }
 
     

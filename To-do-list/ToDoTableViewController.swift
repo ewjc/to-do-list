@@ -8,23 +8,35 @@
 
 import UIKit
 
-class ToDoTableViewController: UITableViewController, UpdateToDoDelegate {
+class ToDoTableViewController: UITableViewController, UpdateToDoDelegate, TaskCompletionDelegate {
 
     // MARK: Properties
     
-    var toDoArray: [ToDoTask] = []
+    var toDoArray = [ToDoTask]()
     
     
     // MARK: Functions
-    func updateNewTask(task: ToDoTask) {
+    func addNewTask(task: ToDoTask) {
         toDoArray.append(task)
         tableView.reloadData()
+    }
+    
+    func updateTaskCompletion() {
+//        var tempArray: [ToDoTask] = []
+//        for i in toDoArray.count {
+//            
+//        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "destinationVC" {
         let destinationVC = segue.destination as! AddToDoViewController
-            destinationVC.toDodelegate = self
+            destinationVC.toDoDelegate = self
+        } else if segue.identifier == "TaskCompletionVC" {
+        let destinationVC = segue.destination as! ToDoViewController
+            destinationVC.taskDelegate = self
+            var array = toDoArray[tableView.indexPathForSelectedRow!.row]
+            destinationVC.deadlineLabel.text = "\(array.deadline)"
         }
     }
     
@@ -32,7 +44,7 @@ class ToDoTableViewController: UITableViewController, UpdateToDoDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(toDoArray)
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -53,14 +65,13 @@ class ToDoTableViewController: UITableViewController, UpdateToDoDelegate {
         // #warning Incomplete implementation, return the number of rows
         return toDoArray.count
     }
-
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "toDoView") as! ToDoTableViewCell
-
+        cell.ToDoTableVC = self
         let toDoTask = toDoArray[indexPath.row]
         cell.taskLabel.text = toDoTask.title
-        cell.deadlineLabel.text = "\(toDoTask.deadline)"
+        cell.deadlineLabel.text = "Deadline: \(toDoTask.deadline)"
         
         return cell
     }

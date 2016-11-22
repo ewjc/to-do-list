@@ -6,11 +6,18 @@
 //  Copyright © 2016 MakeSchool. All rights reserved.
 //
 
+
+
 import UIKit
+
+protocol TaskCompletionDelegate {
+    func updateTaskCompletion()
+}
 
 class ToDoViewController: UIViewController {
     
     // MARK: Properties
+    var taskDelegate: TaskCompletionDelegate!
     
     
     // MARK: IBOutlets
@@ -20,15 +27,19 @@ class ToDoViewController: UIViewController {
 
     
     // MARK: IBActions
-    @IBOutlet weak var markAsDone: UIButton!
-    @IBOutlet weak var deleteThisToDoButton: UIButton!
+    @IBAction func markUndoneButtonPressed(_ sender: UIButton) {
+
+    }
+
+    @IBAction func deleteToDoButtonPressed(_ sender: UIButton) {
+    }
     
     
     
     // MARK: View Did Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        deadlineLabel.text = ""
         
     }
 
