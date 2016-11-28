@@ -59,7 +59,7 @@
                                     <outlet property="deadlineLabel" destination="xKm-qW-BXa" id="5vR-En-YKa"/>
                                     <outlet property="markCompleteButton" destination="suX-AY-Liu" id="N12-R4-rky"/>
                                     <outlet property="taskLabel" destination="JUz-LR-XCU" id="4Nl-Ui-tL5"/>
-                                    <segue destination="BYZ-38-t0r" kind="show" identifier="TaskCompetionVC" trigger="accessoryAction" id="pce-B2-lIo"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="TaskCompletionVC" trigger="accessoryAction" id="pce-B2-lIo"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

@@ -11,14 +11,17 @@
 import UIKit
 
 protocol TaskCompletionDelegate {
-    func updateTaskCompletion()
+    func updateTaskCompletion(task: ToDoTask)
+    func deleteTask(task: ToDoTask)
 }
 
 class ToDoViewController: UIViewController {
+
     
     // MARK: Properties
     var taskDelegate: TaskCompletionDelegate!
-    
+    var deadlineLabelText: String!
+    var task: ToDoTask!
     
     // MARK: IBOutlets
     @IBOutlet weak var deadlineLabel: UILabel!
@@ -28,10 +31,12 @@ class ToDoViewController: UIViewController {
     
     // MARK: IBActions
     @IBAction func markUndoneButtonPressed(_ sender: UIButton) {
-
+        taskDelegate.updateTaskCompletion(task: task)
     }
 
     @IBAction func deleteToDoButtonPressed(_ sender: UIButton) {
+        taskDelegate.deleteTask(task: task)
+        performSegue(withIdentifier: "unwindToVC", sender: self)
     }
     
     
@@ -39,7 +44,7 @@ class ToDoViewController: UIViewController {
     // MARK: View Did Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        deadlineLabel.text = ""
+        deadlineLabel.text = deadlineLabelText
         
     }
 
